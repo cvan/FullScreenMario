@@ -12,6 +12,7 @@ body {
 /* General Positioning */
 
 #header {
+  display: none;
   position: absolute;
   height: 49px;
   width: 100%;
