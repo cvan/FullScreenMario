@@ -16,16 +16,33 @@ function resetTriggers() {
     l:      [76],                                                        // l
   });
 
+  // galaxy.js support for mobile controllers.
+  // gamepad.bind('down', ControlsPipe('keydown', true));
+  // gamepad.bind('up', ControlsPipe('keyup', false));
+
+  // todo: consider returning values for D-pad from mobile gamepad:
+  // how hard is the being pressed, how much of the button is being pressed?
+
   // Gamepad.js support for joysticks and controllers
   window.gamepad = new Gamepad();
   gamepad.bind(Gamepad.Event.BUTTON_DOWN, ControlsPipe("keydown", true));
   gamepad.bind(Gamepad.Event.BUTTON_UP, ControlsPipe("keyup", false));
+  gamepad.bind(Gamepad.Event.BUTTON_DOWN, function (e) {
+    switch (e.control) {
+      case "FACE_1":
+        keydown("DPAD_UP");
+        setTimeout(function () {
+          keyup("DPAD_UP");
+        }, 1000);
+        break;
+    }
+  });
   gamepad.bind(Gamepad.Event.AXIS_CHANGED, function(event) {
     var value = event.value,
         value_abs = abs(value);
 
     // Don't allow tremors
-    if(value_abs < 0.1) return;
+    // if(value_abs < 0.1) return;
 
     // Depending on the axis used...
     switch(event.axis) {
@@ -46,13 +63,14 @@ function resetTriggers() {
       case "LEFT_STICK_X":
       case "RIGHT_STICK_X":
         // If it actually has a direction, either go left or right
-        if(value_abs > 0.5) {
-          keydown(value < 0 ? "DPAD_LEFT" : "DPAD_RIGHT");
-        }
-        // It doesn't have a direction, so they're both unpressed
-        else {
-          keyup("DPAD_UP");
-          keyup("DPAD_DOWN");
+        // TODO: Handle floating-point values
+        if (value === 1) {
+          keydown("DPAD_RIGHT");
+        } else if (value === -1) {
+          keydown("DPAD_LEFT");
+        } else {
+          keyup("DPAD_LEFT");
+          keyup("DPAD_RIGHT");
         }
       break;
     }

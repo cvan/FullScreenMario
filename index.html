@@ -6,6 +6,11 @@
 	<meta charset="utf-8">
   <link href="default.css" rel="stylesheet">
   <link href="Fonts/stylesheet.css" rel="stylesheet">
+
+  <!-- todo: reference actual minified bundle -->
+  <script src="../../js/external/peer.js"></script>
+  <script src="../../js/external/promise-1.0.0.js"></script>
+  <script src="../../js/host.bundle.js"></script>
 	<script src="ui.js"></script>
 </head>
 
@@ -49,10 +54,6 @@
 
   </div>
 
-  <!-- todo: reference actual minified bundle -->
-  <script src="../../js/external/peer.js"></script>
-  <script src="../../js/external/promise-1.0.0.js"></script>
-  <script src="../../js/host.bundle.js"></script>
   <script>
     gamepad.pair().then(function (conn) {
       console.log('Connected to controller');
