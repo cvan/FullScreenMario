@@ -17,8 +17,6 @@ function resetTriggers() {
   });
 
   // galaxy.js support for mobile controllers.
-  // gamepad.bind('down', ControlsPipe('keydown', true));
-  // gamepad.bind('up', ControlsPipe('keyup', false));
 
   // todo: consider returning values for D-pad from mobile gamepad:
   // how hard is the being pressed, how much of the button is being pressed?
