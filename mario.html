@@ -28,13 +28,8 @@
     <script src="src/QuadsKeepr/QuadsKeepr.js"></script>
 
     <!-- todo: reference actual minified bundle -->
-    <script src="../../js/external/peer.js"></script>
-    <script src="../../js/external/promise-1.0.0.js"></script>
     <script src="../../js/host.bundle.js"></script>
     <script>
-      // gamepad.bind('down', ControlsPipe('keydown', true));
-      // gamepad.bind('up', ControlsPipe('keyup', false));
-
       gamepad.pair().then(function (conn) {
         console.log('Connected to controller');
       }).catch(console.error.bind(console));
