@@ -30,9 +30,13 @@
     <!-- todo: reference actual minified bundle -->
     <script src="../../js/host.bundle.js"></script>
     <script>
-      gamepad.pair().then(function (conn) {
+      var pad = gamepad.init();
+
+      pad.pair().then(function (controller) {
         console.log('Connected to controller');
-      }).catch(console.error.bind(console));
+      }).catch(function (e) {
+        console.error(e.stack ? e.stack : e);
+      });
     </script>
 </head>
 <body onload="FullScreenMario()">
